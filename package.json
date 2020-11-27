@@ -4,7 +4,17 @@
   "description": "Eslint configuration for typescript projects",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compliance-tests": "npm run compliance:commits && npm run compliance:lint",
+    "compliance:commits": "commitlint --from=main --to=HEAD",
+    "compliance:lint": "eslint --ignore-path .gitignore .",
+    "pipeline": "npm run compliance-tests && npm run security-tests && npm run tests",
+    "security-tests": "npm run security:outdated && npm run security:audit",
+    "security:audit": "npm audit || true",
+    "security:outdated": "npm outdated || true",
+    "security:snyk": "snyk test -dev",
+    "test": "npm run pipeline",
+    "tests": "npm run tests:unit",
+    "tests:unit": "nyc --report-dir .coverage/unit mocha \"tests/unit/**/*.spec.js\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +27,20 @@
   "author": "Jayne Doe <jayne.doe@engineering.digital.dwp.gov.uk>",
   "license": "ISC",
   "dependencies": {
+    "@dwp/eslint-config-base": "4.1.0",
     "@typescript-eslint/parser": "4.8.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "11.0.0",
+    "@dwp/commitlint-config-base": "1.1.0",
+    "@dwp/eslint-config-mocha": "1.1.0",
+    "@dwp/nyc-config-base": "1.0.0",
+    "chai": "4.2.0",
+    "eslint": "7.14.0",
+    "husky": "4.3.0",
+    "lint-staged": "10.5.2",
+    "mocha": "8.2.1",
+    "nyc": "15.1.0",
+    "snyk": "1.431.2"
   }
 }
