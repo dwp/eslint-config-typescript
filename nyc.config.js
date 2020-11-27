@@ -6,7 +6,7 @@ config.exclude = config.exclude || [];
 config.exclude.push(
   '*.config.js',
   '.huskyrc.js',
-  '*/.eslintrc.js',
+  '.eslintrc.js',
   '.coverage/**/*',
 );
 
