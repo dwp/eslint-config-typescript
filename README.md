@@ -27,6 +27,6 @@ Don't use `.eslintrc` (low precedence) or `package.json` (even lower, and just p
 Add `eslint` to your test suite like this, or see our [package.json](package.json) for an example of how we do it:
 
 ```json
-"test": "eslint ."
+"test": "eslint . --ext .ts,.js"
 ```
 
