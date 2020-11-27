@@ -15,5 +15,8 @@
     "typescript"
   ],
   "author": "Jayne Doe <jayne.doe@engineering.digital.dwp.gov.uk>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@typescript-eslint/parser": "4.8.2"
+  }
 }

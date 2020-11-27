@@ -1,0 +1,118 @@
+.executor-docker: &executor-docker
+  tags:
+    - docker
+
+.node-image: &node-image
+  image: node:12.18.4-alpine@sha256:f667be05181f5bc13cc8ff1dac8b0ffb9198e98f3d6562342ef44255087a584c
+
+.install-git: &install-git
+  before_script:
+    - apk update && apk upgrade && apk add --no-cache git
+
+.dependency-npm: &dependency-npm
+  dependencies:
+    - npm
+
+.dependency-unit: &dependency-unit
+  dependencies:
+    - npm
+    - unit
+
+.only-branches: &only-branches
+  except:
+    - main
+    - tags
+    - triggers
+
+.not-branches: &not-branches
+  only:
+    - main
+    - tags
+
+stages:
+  - build
+  - compliance-tests
+  - security-tests
+  - unit-tests
+  - quality-tests
+
+npm:
+  stage: build
+  <<: *executor-docker
+  <<: *node-image
+  script:
+    - HASH="$( md5sum package.json )"
+    - CACHE=/tmp/${CI_PROJECT_NAME}_${HASH}.tgz
+    - if [ -f "$CACHE" ]; then
+        tar -xzf "$CACHE";
+      else
+        rm -f /tmp/${CI_PROJECT_NAME}_*.tgz &&
+        npm install &&
+        tar -czf "$CACHE" node_modules;
+      fi
+  artifacts:
+    name: "${CI_PROJECT_NAME}_${CI_JOB_ID}_${CI_COMMIT_SHA}"
+    expire_in: 30 mins
+    paths:
+      - node_modules
+
+commitlint-branch:
+  stage: compliance-tests
+  <<: *executor-docker
+  <<: *node-image
+  <<: *install-git
+  <<: *dependency-npm
+  script:
+    - git fetch origin main --quiet
+    - git checkout main --quiet
+    - git reset --hard origin/main --quiet
+    - git checkout - --quiet
+    - npm run compliance:commits
+  <<: *only-branches
+
+eslint:
+  stage: compliance-tests
+  <<: *executor-docker
+  <<: *node-image
+  <<: *dependency-npm
+  script:
+    - npm run compliance:lint
+
+outdated:
+  stage: security-tests
+  <<: *executor-docker
+  <<: *node-image
+  <<: *dependency-npm
+  script:
+    - npm outdated
+  allow_failure: true
+
+audit:
+  stage: security-tests
+  <<: *executor-docker
+  <<: *node-image
+  script:
+    - npm run security:audit
+
+unit:
+  stage: unit-tests
+  <<: *executor-docker
+  <<: *node-image
+  <<: *dependency-npm
+  script:
+    - npm run tests:unit
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - .coverage/unit/lcov.info
+  coverage: /^Lines\s*:\s(\d+(?:.\d+)?%)/
+
+sonar-scanner:
+  stage: quality-tests
+  <<: *executor-docker
+  image: $CI_REGISTRY/engineering-practice/sonar-scanner:latest
+  <<: *dependency-unit
+  script:
+    - sed -i.bak -e "s|^SF:\(.*/[[:digit:]]\{1,\}/.*/\)|SF:$( pwd )/|g" .coverage/unit/lcov.info
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR
+  <<: *not-branches
