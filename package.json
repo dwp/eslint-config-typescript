@@ -16,9 +16,13 @@
     "tests": "npm run tests:unit",
     "tests:unit": "nyc --report-dir .coverage/unit mocha \"tests/unit/**/*.spec.js\""
   },
+  "homepage": "https://github.com/dwp/eslint-config-typescript",
+  "bugs": {
+    "url": "https://github.com/dwp/eslint-config-typescript/-/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.nonprod.dwpcloud.uk:jayne.doe/eslint-config-typescript.git"
+    "url": "git@github.com:dwp/eslint-config-typescript.git"
   },
   "keywords": [
     "eslint",
@@ -41,6 +45,6 @@
     "lint-staged": "10.5.2",
     "mocha": "8.2.1",
     "nyc": "15.1.0",
-    "snyk": "1.431.2"
+    "snyk": "1.431.3"
   }
 }
