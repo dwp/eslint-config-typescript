@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+.sonarlint
+.nyc_output
+.coverage
+.scannerwork
+.idea
+dwp-eslint-config-typescript-*.tgz
