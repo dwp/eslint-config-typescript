@@ -31,7 +31,7 @@
   "author": "Jayne Doe <jayne.doe@engineering.digital.dwp.gov.uk>",
   "license": "ISC",
   "dependencies": {
-    "@dwp/eslint-config-base": "4.1.0",
+    "@dwp/eslint-config-base": "5.0.1",
     "@typescript-eslint/parser": "4.22.0"
   },
   "devDependencies": {
