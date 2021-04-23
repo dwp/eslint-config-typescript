@@ -19,7 +19,7 @@ module.exports = {
     semi: 'off',
 
     '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: false }],
-    '@typescript-eslint/indent': ['error', 2],
+    '@typescript-eslint/indent': ['error', 2, { SwitchCase: 1 }],
     '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/semi': ['error', 'always', { omitLastInOneLineBlock: false }],
