@@ -35,19 +35,19 @@
   "license": "ISC",
   "dependencies": {
     "@dwp/eslint-config-base": "5.0.1",
-    "@typescript-eslint/parser": "4.22.0"
+    "@typescript-eslint/parser": "4.26.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "12.1.1",
+    "@commitlint/cli": "12.1.4",
     "@dwp/commitlint-config-base": "1.2.0",
     "@dwp/eslint-config-mocha": "1.2.1",
     "@dwp/nyc-config-base": "1.0.0",
     "chai": "4.3.4",
-    "eslint": "7.24.0",
+    "eslint": "7.27.0",
     "husky": "^6.0.0",
-    "lint-staged": "10.5.4",
-    "mocha": "8.3.2",
+    "lint-staged": "11.0.0",
+    "mocha": "8.4.0",
     "nyc": "15.1.0",
-    "snyk": "1.563.0"
+    "snyk": "1.618.0"
   }
 }
