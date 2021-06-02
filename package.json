@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Eslint configuration for typescript projects",
   "main": "src/index.js",
+  "files": [
+    "src/*"
+  ],
   "scripts": {
     "compliance-tests": "npm run compliance:commits && npm run compliance:lint",
     "compliance:commits": "commitlint --from=main --to=HEAD",
@@ -21,7 +24,7 @@
   },
   "homepage": "https://github.com/dwp/eslint-config-typescript",
   "bugs": {
-    "url": "https://github.com/dwp/eslint-config-typescript/-/issues"
+    "url": "https://github.com/dwp/eslint-config-typescript/issues"
   },
   "repository": {
     "type": "git",
