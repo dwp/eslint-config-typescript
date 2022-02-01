@@ -37,20 +37,20 @@
   "author": "Jayne Doe <jayne.doe@engineering.digital.dwp.gov.uk>",
   "license": "ISC",
   "dependencies": {
-    "@dwp/eslint-config-base": "5.0.1",
-    "@typescript-eslint/parser": "4.26.0"
+    "@dwp/eslint-config-base": "6.0.0",
+    "@typescript-eslint/parser": "5.10.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "12.1.4",
+    "@commitlint/cli": "16.1.0",
     "@dwp/commitlint-config-base": "1.2.0",
     "@dwp/eslint-config-mocha": "1.2.1",
     "@dwp/nyc-config-base": "1.0.0",
-    "chai": "4.3.4",
-    "eslint": "7.27.0",
-    "husky": "^6.0.0",
-    "lint-staged": "11.0.0",
-    "mocha": "8.4.0",
+    "chai": "4.3.6",
+    "eslint": "8.8.0",
+    "husky": "7.0.4",
+    "lint-staged": "12.3.2",
+    "mocha": "9.2.0",
     "nyc": "15.1.0",
-    "snyk": "1.618.0"
+    "snyk": "1.842.0"
   }
 }
