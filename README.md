@@ -30,3 +30,14 @@ Add `eslint` to your test suite like this, or see our [package.json](package.jso
 "test": "eslint . --ext .ts,.js"
 ```
 
+## Releasing
+
+To cut a release of the project:
+
+```bash
+git checkout -b chore/package
+npx standard-version
+git push -u origin head
+```
+
+And follow the usual MR process.

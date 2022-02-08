@@ -7,6 +7,7 @@ config.exclude.push(
   '*.config.js',
   '.huskyrc.js',
   '.eslintrc.js',
+  '.versionrc.js',
   '.coverage/**/*',
 );
 
